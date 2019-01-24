@@ -20,10 +20,14 @@ class StudentDiploma extends Component {
     }
   };
 
+  handleClick = id => {
+    this.props.history.push(`/retained/${id}`);
+  };
+
   render() {
     return (
       <div>
-        <div className="container">
+        {/*<div className="container">
           <fieldset className="fieldset">
             <h5>
               Você esta imprimindo a 1º Via do Diploma para Augusto Cavalcante
@@ -122,14 +126,17 @@ class StudentDiploma extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="float-right">
-                <a className="selecionar" href="tg" onClick={this.Validate}>
+                <a
+                  className="selecionar"
+                  onClick={() => this.handleClick(this.props.match.params.id)}
+                >
                   IMPRIMIR 1º VIA
                 </a>
               </div>
             </div>
           </div>
           <br />
-        </div>
+    </div>*/}
       </div>
     );
   }

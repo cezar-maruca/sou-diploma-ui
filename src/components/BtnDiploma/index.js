@@ -5,7 +5,7 @@ import './style.scss';
 const BtnDiploma = () => {
   return (
     <div>
-      <a href="btn">
+      <a href="btn" onClick={this.saveStorage}>
         <img className="btndiploma" src={ButtonDiploma} />
       </a>
     </div>

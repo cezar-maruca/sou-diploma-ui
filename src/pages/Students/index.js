@@ -12,11 +12,11 @@ class Students extends Component {
     courses: [],
     search: '',
     activePage: 1,
-    countPerPage: 5
+    countPerPage: 5,
+    tab: 0
   };
 
   handlePageChange = pageNumber => {
-    console.log(`active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
   };
 
@@ -27,28 +27,28 @@ class Students extends Component {
 
   handleSearch = ({ target }) => {
     this.setState({ search: target.value });
-    //console.log(this.state.search)
   };
 
-  handleClick = id => {
-    this.props.history.push(`/process/${id}`);
+  handleClick = academic_register => {
+    this.props.history.push(`/process/${academic_register}`);
   };
 
   render() {
+    const { tab } = this.state;
     return (
       <div>
         <div className="container">
           <h2 className="title">Nome do Curso - 1º VIA</h2>
           <fieldset>
-            <Menu />
+            <Menu handleClick={val => this.setState({ tab: val })} tab={tab} />
           </fieldset>
           <fieldset>
-            <div class="row">
+            <div className="row">
               <div className="col-md-6">
-                <div class="custom-control custom-checkbox">
+                <div className="custom-control custom-checkbox">
                   <input
                     type="checkbox"
-                    class="custom-control-input"
+                    className="custom-control-input"
                     id="defaultChecked2"
                   />
                   {/* <label class="custom-control-label" for="defaultChecked2">
@@ -72,11 +72,16 @@ class Students extends Component {
                   <th scope="col">
                     Semestre / <br /> de Conclusão
                   </th>
+                  <th scope="col">
+                    Numero do <br />
+                    Processo
+                  </th>
                   <th scope="col" />
                 </tr>
               </thead>
               <tbody>
                 {this.state.courses
+                  .filter(item => item.proc_status == tab)
                   .filter(data => RegExp(this.state.search).test(data.name))
                   .filter(
                     (data, index) =>
@@ -86,21 +91,22 @@ class Students extends Component {
                   )
                   .map(data => (
                     <tr>
-                      <td onClick={() => this.handleClick(data.id)}>
+                      <td onClick={() => this.handleClick(data.academic_register)}>
                         {data.name}
                       </td>
-                      <td onClick={() => this.handleClick(data.id)}>
+                      <td onClick={() => this.handleClick(data.academic_register)}>
                         {data.academic_register}
                       </td>
-                      <td onClick={() => this.handleClick(data.id)}>
+                      <td onClick={() => this.handleClick(data.academic_register)}>
                         {data.polo}
                       </td>
-                      <td onClick={() => this.handleClick(data.id)}>
+                      <td onClick={() => this.handleClick(data.academic_register)}>
                         {data.year_entry}
                       </td>
-                      <td onClick={() => this.handleClick(data.id)}>
+                      <td onClick={() => this.handleClick(data.academic_register)}>
                         {data.year_conclusion}
                       </td>
+                      <td>&nbsp;</td>
                       <td>
                         <Submit />
                       </td>

@@ -36,13 +36,15 @@ class Diploma extends Component {
   async componentDidMount() {
     const {
       match: {
-        params: { ra: student_id }
+        params: { id }
       }
     } = this.props;
 
     const diploma = await apiDiploma.get(
       `v_impressao_diploma?_where=(student_id,eq,65537)`
     );
+
+    localStorage.setItem('diploma', JSON.stringify(diploma.data[0]));
 
     this.setState({
       diploma: diploma.data[0]
@@ -90,94 +92,86 @@ class Diploma extends Component {
                     >
                       <img src={Impressora} className="margin" />
                     </a>
-                    <img className="margin" src={Dowloands} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="container" id="diploma">
-          <img
-            src={DiplomaImagem}
-            alt="diploma-img"
-            className="diploma-tamanho"
-          />
-          <div className="conteudo-diploma">
-            A presidente da
-            <span className="titulo">
-              Universidade Virtual do Estado de São Paulo,
-            </span>
-            <br />
-            <span className="subtitulo">
-              no uso de suas atribuições, confere a
-            </span>
-            <h3 className="subtitulo-2">{this.state.diploma.name}</h3>
-            <div className="conteudo">
-              de nacionalidade {this.state.diploma.nacionalidade},
-              <br />
-              portador da cédula de identidade RG {this.state.diploma.RG} SP,
-              <br />
-              nascido em{' '}
-              {this.state.diploma['birth_date']
-                ? this.state.diploma['birth_date'].split('/')[0]
-                : ''}
-              ,{' '}
-              {this.state.diploma['birth_date']
-                ? this.state.diploma['birth_date'].split('/')[1]
-                : ''}{' '}
-              de{' '}
-              {this.state.diploma['birth_date']
-                ? this.state.diploma['birth_date'].split('/')[2]
-                : ''}
-              ,
-              <br />
-              e natural do Estado de São Paulo,
-              <br />o diploma do
+        <div className="container">
+          <div id="diploma" className="show">
+            <div className="content">
+              <p className="paragraph">
+                A presidente da{' '}
+                <span>Universidade Virtual do Estado de São Paulo</span>,
+              </p>
+              <p className="paragraph -marginBottom">
+                no uso de suas atribuições, confere a
+              </p>
+              <h1 id="name">{this.state.diploma.name}</h1>
+              <p className="paragraph">
+                de nacionalidade {this.state.diploma.nacionalidade},
+              </p>
+              <p className="paragraph">
+                portador da cédula de identidade RG {this.state.diploma.RG} SP,
+              </p>
+              <p className="paragraph">
+                nascido em{' '}
+                {this.state.diploma['birth_date']
+                  ? this.state.diploma['birth_date'].split('/')[0]
+                  : ''}{' '}
+                de{' '}
+                {this.state.diploma['birth_date']
+                  ? months[
+                      Number(this.state.diploma['birth_date'].split('/')[1]) - 1
+                    ]
+                  : ''}{' '}
+                de{' '}
+                {this.state.diploma['birth_date']
+                  ? this.state.diploma['birth_date'].split('/')[2]
+                  : ''}
+              </p>
+              <p className="paragraph">e natural do Estado de São Paulo,</p>
+              <p className="paragraph">o diploma do</p>
+              <h2 id="course">{this.state.diploma['course_name']}</h2>
+              <p className="paragraph">
+                concluído em{' '}
+                {this.state.diploma['date_conclusion']
+                  ? months[
+                      Number(
+                        this.state.diploma['date_conclusion'].split('/')[1]
+                      ) - 1
+                    ]
+                  : ''}{' '}
+                de{' '}
+                {this.state.diploma['date_conclusion']
+                  ? this.state.diploma['date_conclusion'].split('/')[2]
+                  : ''}
+              </p>
+              <p className="paragraph -marginBottom">
+                para que possa gozar dos direitos e prerrogativas legais.
+              </p>
+              <p className="paragraph">
+                São Paulo, {new Date().getDate()} de{' '}
+                {months[new Date().getMonth()]} de {new Date().getFullYear()}.
+              </p>
             </div>
-            <h5 className="conteudo-titulo">
-              {this.state.diploma['course_name']}
-            </h5>
-            <span className="conteudo-texto">
-              concluído em{' '}
-              {this.state.diploma['date_conclusion']
-                ? this.state.diploma['date_conclusion'].split('/')[1]
-                : ''}{' '}
-              de{' '}
-              {this.state.diploma['date_conclusion']
-                ? this.state.diploma['date_conclusion'].split('/')[2]
-                : ''}
-              <br />
-              <span className="conteudo-texto-1">
-                para que possa gozar dos direitos e prerrogativas legais,
-              </span>
-            </span>
-            <p className="paragrafo">
-              São Paulo, {new Date().getDate()} de{' '}
-              {months[new Date().getMonth()]} de {new Date().getFullYear()}.
-            </p>
-          </div>
-          <div className="container margem-conteudo">
-            <div className="rows">
-              <span className="sublinhado">Patricia Laczynski de Souza</span>
-              <span className="sublinhado">Fernanda Gouveia</span>
-              <span className="sublinhado negrito">Diplomado(a)</span>
-            </div>
-          </div>
-          <div className="container">
-            <div className="rows">
-              <span className="negrito">Diretoria Acadêmica</span>
-              <span className="negrito-1">Presidente</span>
+            <div className="signatures">
+              <p className="signature">
+                &nbsp; <span>&nbsp;</span>
+              </p>
+              <p className="signature">
+                &nbsp; <span>&nbsp;</span>
+              </p>
+              <p className="signature">
+                <span>Diplomado(a)</span>{' '}
+              </p>
             </div>
           </div>
-          <br />
-          <br />
           <div className="row">
             <div className="col-md-12">
               <div className="float-right">
-                <a className="selecionar" href="tg">
-                  VOLTAR
-                </a>
+                <a className="selecionar">VOLTAR</a>
               </div>
             </div>
           </div>

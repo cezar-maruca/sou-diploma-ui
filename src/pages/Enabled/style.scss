@@ -54,3 +54,7 @@
 .custom-checkbox :checked.custom-control-input ~ .custom-control-label::before {
   background-color: #000 !important;
 }
+
+input:hover {
+  cursor: pointer;
+}

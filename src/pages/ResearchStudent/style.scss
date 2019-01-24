@@ -54,8 +54,9 @@
 
 .page-item.active .page-link {
   color: rgb(98, 121, 128);
-  background-color: rgb(178, 50, 57);
-  border-color: rgb(16, 28, 33);
+  background-color: #d33115;
+  border-color: white;
+  color: white;
 }
 
 a:hover {
@@ -68,4 +69,8 @@ a:hover {
 
 * {
   letter-spacing: 0px;
+}
+
+.border {
+  border: 1px solid #ccc;
 }

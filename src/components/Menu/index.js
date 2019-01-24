@@ -1,42 +1,44 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Actions, Action } from './style';
+import {
+  Container,
+  Avatar,
+  Icon,
+  Table,
+  Head,
+  Row,
+  Th,
+  Body,
+  Td,
+  Section,
+  Title,
+  SearchInput,
+  Search,
+  Nav,
+  Actions,
+  Action
+} from './style';
+
 class Menu extends Component {
-  state = {
-    tab: 0
-  };
   render() {
-    const { tab } = this.state;
+    const { handleClick, tab } = this.props;
     return (
       <div>
-        <nav id="menu">
+        <Nav>
           <Actions>
-            <Action
-              active={tab === 0}
-              onClick={() => this.setState({ tab: 0 })}
-            >
-              <b>Em Abertos</b>
+            <Action active={tab === 0} onClick={() => handleClick(0)}>
+              Em aberto
             </Action>
-            <Action
-              active={tab === 1}
-              onClick={() => this.setState({ tab: 1 })}
-            >
-              <b>Auditados</b>
+            <Action active={tab === 1} onClick={() => handleClick(1)}>
+              Auditados
             </Action>
-            <Action
-              active={tab === 2}
-              onClick={() => this.setState({ tab: 2 })}
-            >
-              <b>Retidos</b>
+            <Action active={tab === 2} onClick={() => handleClick(2)}>
+              Retidos
             </Action>
-            <Action
-              active={tab === 3}
-              onClick={() => this.setState({ tab: 3 })}
-            >
-              <b>Diplomado</b>
+            <Action active={tab === 3} onClick={() => handleClick(3)}>
+              Diplomados
             </Action>
           </Actions>
-        </nav>
+        </Nav>
       </div>
     );
   }

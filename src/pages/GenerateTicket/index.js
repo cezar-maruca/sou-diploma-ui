@@ -8,10 +8,18 @@ import Search from '../../components/Search';
 import BtnEmail from '../../components/BtnEmail';
 import BtnDiploma from '../../components/BtnDiploma';
 import Generate from '../../../src/services/generateticketApi';
+import Pagination from 'react-js-pagination';
 
 class GenerateTicket extends Component {
   state = {
-    courses: []
+    courses: [],
+    activePage: 1,
+    countPerPage: 5
+  };
+
+  handlePageChange = pageNumber => {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
   };
 
   async componentDidMount() {
@@ -24,6 +32,10 @@ class GenerateTicket extends Component {
     //console.log(this.state.search)
   };
 
+  handleClick = id => {
+    this.props.history.push(`/protocol/${id}`);
+  };
+  x;
   render() {
     return (
       <div>
@@ -34,7 +46,7 @@ class GenerateTicket extends Component {
           </fieldset>
           <fieldset>
             <div class="row">
-              <div className="col-md-5">
+              <div className="col-md-4">
                 <Search />
               </div>
               {/*<div className="col-md-7">
@@ -58,38 +70,52 @@ class GenerateTicket extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  {this.state.courses
-                    .filter(data => RegExp(this.state.search).test(data.name))
-                    .map(data => (
-                      <tr>
-                        <td>
-                          <img className="circle" src={user} alt="" />
-                          {data.student_name}
-                        </td>
-                        <td>{data.academic_registe}</td>
-                        <td>{data.year_entry}</td>
-                        <td>{data.year_conclusion}</td>
-                        <td>{data.status}</td>
-                        <td>
-                          <Submit />
-                        </td>
-                      </tr>
-                    ))}
-                </tr>
+                {this.state.courses
+                  .filter(data => RegExp(this.state.search).test(data.name))
+                  .filter(
+                    (data, index) =>
+                      index >=
+                        this.state.countPerPage * (this.state.activePage - 1) &&
+                      index < this.state.countPerPage * this.state.activePage
+                  )
+                  .map(data => (
+                    <tr
+                      onClick={() => this.handleClick(data.academic_register)}
+                    >
+                      <td>{data.student_name}</td>
+                      <td>{data.academic_register}</td>
+                      <td>{data.year_entry}</td>
+                      <td>{data.year_conclusion}</td>
+                      <td>{data.status}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
-          </fieldset>
-          <br />
-          <div className="row">
-            <div className="col-md-12">
-              <div className="float-right">
-                {/*<a className="selecionar" href="tg">
-                 GERAR DIPLOMA
- </a>*/}
+            <div className="float-right">
+              <div className="padding">
+                <Pagination
+                  activePage={this.state.activePage}
+                  itemsCountPerPage={5}
+                  totalItemsCount={this.state.courses.length}
+                  pageRangeDisplayed={5}
+                  onChange={this.handlePageChange}
+                  innerClass="pagination"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                />
               </div>
             </div>
-          </div>
+          </fieldset>
+          <br />
+          {/* <div className="row">
+            <div className="col-md-12">
+              <div className="float-right">
+                <a className="selecionar" href="tg">
+                  GERAR DIPLOMA
+                </a>
+              </div>
+            </div>
+          </div> */}
         </div>
         <br />
       </div>

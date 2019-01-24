@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import './style.scss';
+import ReactToPrint from 'react-to-print';
+import { Link } from 'react-router-dom';
 
+import Diploma from '../LayoutDiploma';
+import { Formik, Form, ErrorMessage } from 'formik';
+
+import './style.scss'
 class Print extends Component {
   state = {
     signatures: [],
     employees: []
   };
-  saveOnLocalStorage = e => {
+  /* saveOnLocalStorage = e => {
     if (
       document.getElementById('optSignature').value == 0 ||
       document.getElementById('optSignature2').value == 0 ||
@@ -43,15 +48,15 @@ class Print extends Component {
       } else {
         localStorage.setItem('signatures', '');
       }
-    }
+    }*/
 
-    /* if (document.getElementById('optSignature') == '') {
+  /* if (document.getElementById('optSignature') == '') {
       alert('Por favor, selecione uma opção valida');
       document.getElementById('optSignature').focus();
       return false;
     }*/
 
-    if (
+  /* if (
       document.getElementById('optEmployee') !=
       document.getElementById('optEmployee2')
     ) {
@@ -59,13 +64,36 @@ class Print extends Component {
     } else {
       localStorage.setItem('employees', '');
     }
-  };
+  };*/
 
   handleClick = id => {
     this.props.history.push(`/studentdiploma/${id}`);
   };
 
+  renderContent = () => {
+    // eslint-disable-line arrow-body-style
+    return this.componentRef;
+  };
+
+  renderTrigger = () => {
+    // eslint-disable-line arrow-body-style
+    return (
+      <button
+        className="selecionar"
+        onClick={this.saveOnLocalStorage}
+        type="button"
+      >
+        IMPRIMIR 1º VIA
+      </button>
+    );
+  };
+
+  setRef = ref => {
+    this.componentRef = ref;
+  };
+
   render() {
+    const { signatures, employees } = this.state;
     return (
       <div>
         <form>
@@ -228,17 +256,134 @@ class Print extends Component {
                   </div>
                 </div>
               </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div class="form-group">
+                    <label for="optSignature">Assinaturas*</label>
+                    <select
+                      class="form-control"
+                      id="optSignature"
+                      name="optSignature"
+                      required
+                      oninvalid="this.setCustomValidity(\'Selecione uma opção valida\')"
+                      onChange={e => {
+                        let { signatures } = this.state;
+                        signatures[1] =
+                          e.target.options[e.target.selectedIndex].text;
+                        this.setState({ signatures });
+                      }}
+                    >
+                      <option value="0">Selecione um Cargo</option>
+                      <option value="1">
+                        Gerente de Registros Acadêmicos e Apoio Administrativo
+                      </option>
+                      <option value="2">
+                        Coordenado(a) de Registros Acadêmicos e Apoio
+                        Administrativo
+                      </option>
+                      <option value="3">
+                        Especialista em Sistemas Educacional
+                      </option>
+                      <option value="4">Analista de Gestão Operacional</option>
+                      <option value="5">Analista de Gestão Educacional</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div class="form-group">
+                    <label for="optEmployee2">Funcionário*</label>
+                    <select
+                      class="form-control"
+                      id="optEmployee2"
+                      required
+                      oninvalid="this.setCustomValidity(\'Selecione uma opção valida\')"
+                      name="optEmployee2"
+                      onChange={e => {
+                        let { employees } = this.state;
+                        employees[1] =
+                          e.target.options[e.target.selectedIndex].text;
+                        this.setState({ employees });
+                      }}
+                    >
+                      <option value="0">Selecione um Analista</option>
+                      <option value="1">Genivaldo Linhares Brandão</option>
+                      <option value="2">Andréa Gonçalves Mariano Souza</option>
+                      <option value="3">Leila Costa Somenk</option>
+                      <option value="4">Haroldo Avellar</option>
+                      <option value="5">Caio Fernandes</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div class="form-group">
+                    <label for="optSignature">Assinaturas*</label>
+                    <select
+                      class="form-control"
+                      id="optSignature"
+                      name="optSignature"
+                      required
+                      oninvalid="this.setCustomValidity(\'Selecione uma opção valida\')"
+                      onChange={e => {
+                        let { signatures } = this.state;
+                        signatures[1] =
+                          e.target.options[e.target.selectedIndex].text;
+                        this.setState({ signatures });
+                      }}
+                    >
+                      <option value="0">Selecione um Cargo</option>
+                      <option value="1">
+                        Gerente de Registros Acadêmicos e Apoio Administrativo
+                      </option>
+                      <option value="2">
+                        Coordenado(a) de Registros Acadêmicos e Apoio
+                        Administrativo
+                      </option>
+                      <option value="3">
+                        Especialista em Sistemas Educacional
+                      </option>
+                      <option value="4">Analista de Gestão Operacional</option>
+                      <option value="5">Analista de Gestão Educacional</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div class="form-group">
+                    <label for="optEmployee2">Funcionário*</label>
+                    <select
+                      class="form-control"
+                      id="optEmployee2"
+                      required
+                      oninvalid="this.setCustomValidity(\'Selecione uma opção valida\')"
+                      name="optEmployee2"
+                      onChange={e => {
+                        let { employees } = this.state;
+                        employees[1] =
+                          e.target.options[e.target.selectedIndex].text;
+                        this.setState({ employees });
+                      }}
+                    >
+                      <option value="0">Selecione um Analista</option>
+                      <option value="1">Genivaldo Linhares Brandão</option>
+                      <option value="2">Andréa Gonçalves Mariano Souza</option>
+                      <option value="3">Leila Costa Somenk</option>
+                      <option value="4">Haroldo Avellar</option>
+                      <option value="5">Caio Fernandes</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </fieldset>
             <br />
             <div className="row">
               <div className="col-md-12">
                 <div className="float-right">
-                  <input
-                    onClick={() => this.handleClick(this.props.match.params.id)}
-                    className="selecionar"
-                    type="submit"
-                    value="IMPRIMIR 1º VIA"
+                  <ReactToPrint
+                    trigger={this.renderTrigger}
+                    content={this.renderContent}
                   />
+
                   {/*<a className="selecionar" onClick={this.saveOnLocalStorage}>
                   IMPRIMIR 1º VIA
                   </a>*/}
@@ -248,6 +393,13 @@ class Print extends Component {
             <br />
           </div>
         </form>
+        />
+        <Diploma
+          diploma={JSON.parse(localStorage.getItem('diploma'))}
+          employees={employees}
+          signatures={signatures}
+          ref={this.setRef}
+        />
       </div>
     );
   }

@@ -6,9 +6,9 @@ import impressora from '../../assets/imgs/impressora.png';
 const Protocol = () => {
   return (
     <div>
-      <div className="container">
+      {/*<div className="container">
         <h2 className=" titulo">Protocolo de Entrega do Diploma</h2>
-        <span className="subtitulo">
+        <span className="subtitulos">
           Este protocolo já foi Impresso por Maria Souza, às 18:45h do dia
           23/10/2018
         </span>
@@ -24,7 +24,7 @@ const Protocol = () => {
         </div>
 
         <fieldset>
-          <p className="margin">
+          <p className="margins">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac
             aliquam ex, vitae pretium nulla. Duis iaculis sapien ac sagittis
             congue. Sed blandit metus ac nunc fermentum, at rhoncus quam
@@ -41,7 +41,7 @@ const Protocol = () => {
             lorem, eu consequat magna molestie in.
           </p>
 
-          <p className="margin">
+          <p className="margins">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac
             aliquam ex, vitae pretium nulla. Duis iaculis sapien ac sagittis
             congue. Sed blandit metus ac nunc fermentum, at rhoncus quam
@@ -58,7 +58,7 @@ const Protocol = () => {
             lorem, eu consequat magna molestie in.
           </p>
 
-          <p className="margin">
+          <p className="margins">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac
             aliquam ex, vitae pretium nulla. Duis iaculis sapien ac sagittis
             congue. Sed blandit metus ac nunc fermentum, at rhoncus quam
@@ -86,7 +86,7 @@ const Protocol = () => {
           </div>
         </div>
         <br />
-      </div>
+  </div>*/}
     </div>
   );
 };
