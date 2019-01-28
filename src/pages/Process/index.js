@@ -28,8 +28,12 @@ class Process extends Component {
     this.setState({ search: target.value });
   };
 
-  handleClick = academic_register => {
+  /* handleClick = academic_register => {
     this.props.history.push(`/registration/${academic_register}`);
+  };*/
+
+  handleClick = id => {
+    this.props.history.push(`/registration/${id}`);
   };
 
   render() {
@@ -92,10 +96,21 @@ class Process extends Component {
                         this.state.countPerPage * (this.state.activePage - 1) &&
                       index < this.state.countPerPage * this.state.activePage
                   )
-                  .map(data => (
+                  /*.map(data => (
                     <tr
                       onClick={() => this.handleClick(data.academic_register)}
                     >
+                      <td>{data.name}</td>
+                      <td>{data.academic_register}</td>
+                      <td>{data.polo}</td>
+                      <td>{data.year_entry}</td>
+                      <td>{data.year_conclusion}</td>
+                      <td>xxxxxxx</td>
+                      <td />
+                    </tr>
+                  ))}*/
+                  .map(data => (
+                    <tr onClick={() => this.handleClick(data.student_id)}>
                       <td>{data.name}</td>
                       <td>{data.academic_register}</td>
                       <td>{data.polo}</td>

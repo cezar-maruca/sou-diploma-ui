@@ -21,6 +21,8 @@ import Upload from '../../assets/imgs/upload.svg';
 import Open from '../../assets/imgs/open.svg';
 import Success from '../../assets/imgs/sucesso_upload.svg';
 import PersonalData from '../../../src/services/PersonalDataApi';
+import PersonalData2 from '../../../src/services/PersonalData2Api';
+
 import Cities from '../../../src/services/CityApi';
 import Nationality from '../../../src/services/NationalityApi';
 import Emitter from '../../../src/services/EmitterApi';
@@ -75,24 +77,28 @@ class RegistrationData extends Component {
   };
 
   async componentDidMount() {
-    const { id } = this.props.match.params;
+    const { academic_register } = this.props.match.params;
 
-    const resPersonal = await PersonalData.get(
-      `/v_dados_pessoais?_where=(id,eq,${id})`
+    const resPersonal = await PersonalData2.get(
+      `/v_dados_pessoais/${academic_register}`
     );
 
-    const resCourse = await PersonalData.get(
-      `/v_dados_ingresso?_where=(id,eq,${id})`
+    //const resPersonal = await PersonalData2.get(`/v_dados_pessoais/${id}`);
+
+    const resCourse = await PersonalData2.get(
+      `/v_dados_ingresso/${academic_register}`
     );
 
-    const resCity = await PersonalData.get(`/cities?_where=(id,name,eq,${id})`);
+    //const resCity = await PersonalData.get(`/cities?_where=(id,name,eq,${id})`);
+
+    const resCity = await PersonalData2.get(`/cities/${academic_register}`);
 
     const resNationality = await PersonalData.get(
-      `/v_nacionalidade?_where=(id,name,eq,${id})`
+      `/v_nacionalidade?_where=(id,name,eq,${academic_register})`
     );
 
     const resEmitter = await PersonalData.get(
-      `/v_orgao_emissor?_where=(id,eq,${id})`
+      `/v_orgao_emissor?_where=(id,eq,${academic_register})`
     );
 
     const resStates = await PersonalData.get(`/states?_sort=uf&_size=27`);
@@ -110,7 +116,7 @@ class RegistrationData extends Component {
     );
 
     const resNaturalness = await PersonalData.get(
-      `/v_dados_pessoais?_where=(naturalidade,eq,${id})`
+      `/v_dados_pessoais?_where=(naturalidade,eq,${academic_register})`
     );
 
     this.setState({

@@ -5,12 +5,15 @@ import audited from '../../services/AuditedApi';
 import user from '../../assets/imgs/user.jpg';
 
 class Submit extends Component {
-  handleClick = (id, name) => {
+  handleClick = (id, name, ra) => {
     const { student_id } = this.props;
-    audited.post('responsible-process', { id, student_id, name });
+    audited.post('responsible-process', {
+      id,
+      student_id,
+      name,
+      ra
+    });
   };
-
-  //handleClickImg = () => {};
 
   render() {
     return (
