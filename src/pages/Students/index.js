@@ -122,7 +122,7 @@ class Students extends Component {
                       </td>
                       <td>&nbsp;</td>
                       <td>
-                        <Submit />
+                        <Submit academic_register={data.academic_register} student_id={data.student_id}/>
                       </td>
                     </tr>
                   ))}
